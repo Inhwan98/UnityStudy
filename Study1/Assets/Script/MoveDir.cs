@@ -22,6 +22,7 @@ public class MoveDir : MonoBehaviour
 
         Vector3 _newPosition = transform.position;
         _newPosition.y = _newPosition.y + dir * Time.deltaTime * step;
+        Debug.Log(_newPosition.y);
         transform.position = _newPosition;
 
     }
