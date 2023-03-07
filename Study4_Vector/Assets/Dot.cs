@@ -25,7 +25,7 @@ public class Dot : MonoBehaviour
 
         float dot = Vector3.Dot(A.forward, dir);
 
-
+        Debug.Log(dot);
         if (dot < 0)
         {
             Debug.Log("뒤쪽 : 90도 보다 크다");
