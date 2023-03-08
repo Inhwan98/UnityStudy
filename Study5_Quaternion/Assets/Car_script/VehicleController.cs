@@ -45,7 +45,8 @@ public class VehicleController : MonoBehaviour
         {
             offset.z = offset.z + count;
             GameObject box = Instantiate(Box_Pre, transform.position, transform.rotation);
-            box.transform.position = this.transform.position + offset;
+            box.transform.parent = this.transform;
+            box.transform.localPosition = this.transform.position + offset;
 
             float distance = Vector3.Distance(transform.position, box.transform.position);
             offset += -transform.forward * distance;
