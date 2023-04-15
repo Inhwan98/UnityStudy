@@ -11,7 +11,7 @@ namespace Inhwan.HashTable
 
         private void Awake()
         {
-            h = new HashTable<string>(3 );
+            h = new HashTable<string>(3);
         }
 
         private void Start()
@@ -27,6 +27,8 @@ namespace Inhwan.HashTable
             Debug.Log(h.get("hee"));
             Debug.Log(h.get("jae"));
         }
+
+      
     }
 }
 
