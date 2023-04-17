@@ -5,22 +5,25 @@ using UnityEngine.UI;
 
 public class StorageSlot : MonoBehaviour
 {
+    public Storage storage;
     Inventory inven;
     InventoryUI invenUI;
     PlayerCotroller player;
+
 
     public Image itemIcon;
     public Item item;
 
     private void Awake()
     {
-        player = PlayerCotroller.instance;
-        inven = Inventory.instance;
-        invenUI = InventoryUI.instance;
+        storage = GameObject.FindWithTag("Box").GetComponent<Storage>();
     }
 
     private void Start()
     {
+        player = PlayerCotroller.instance;
+        inven = Inventory.instance;
+        invenUI = InventoryUI.instance;
 
     }
 
@@ -39,12 +42,17 @@ public class StorageSlot : MonoBehaviour
         {
             switch (item.itemType)
             {
+
                 case Item.ItemType.WAEPON:
-                    player.AmountCoin += item.quantity;
+                    Debug.Log($"Player{player.ItemCnt}");
+                    Debug.Log($"storage{storage.ItemCnt}");
                     itemIcon.sprite = null;
                     itemIcon.gameObject.SetActive(false);
+                    invenUI.slots[++player.ItemCnt].UpdateSlotUI(item);
 
-                    invenUI.slots[player.ItemCnt++].UpdateSlotUI(item);
+
+                    storage.ItemCnt--;
+
                     item = null;
                     break;
 
@@ -52,7 +60,6 @@ public class StorageSlot : MonoBehaviour
                     Debug.Log("Empty");
                     break;
             }
-
         }
     }
 }

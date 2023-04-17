@@ -29,20 +29,18 @@ public class Storage : MonoBehaviour
     }
 
     private int itemCnt;
-    
-    
-    public int GetItemCnt()
+    public int ItemCnt
     {
-        return itemCnt;
-    }
-    public void PlusItemCnt()
-    {
-        itemCnt++;
+        get => itemCnt;
+        set
+        {
+            itemCnt = value;
+        }
     }
 
     void Start()
     {
         SlotCnt = 4;
-        itemCnt = 0;
+        itemCnt = -1;
     }
 }

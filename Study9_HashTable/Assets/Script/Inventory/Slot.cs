@@ -8,6 +8,8 @@ public class Slot : MonoBehaviour
     private StorageUI storageui;
     private Storage storage;
     private PlayerCotroller player;
+    private GameManager gmr;
+
     public Item item;
     public Image itemIcon;
 
@@ -20,7 +22,7 @@ public class Slot : MonoBehaviour
 
     private void Start()
     {
-   
+        gmr = GameManager.instance;
     }
 
     public void UpdateSlotUI(Item _item)
@@ -34,18 +36,16 @@ public class Slot : MonoBehaviour
     //인벤토리에서 눌렀을때 타입확인하고 진행
     public void useSlot()
     {
-        if(ClickMovement.instance.isShop)
+        if (ClickMovement.instance.isShop)
         {
             switch (item.itemType)
             {
                 case Item.ItemType.WAEPON:
-                    player.AmountCoin += item.quantity;
                     itemIcon.sprite = null;
                     itemIcon.gameObject.SetActive(false);
-                    storageui.slots[storage.GetItemCnt()].UpdateSlotUI(item);
-                    storage.PlusItemCnt();
-
-
+                    storageui.slots[++storage.ItemCnt].UpdateSlotUI(item);
+                    gmr.HashPut(item.name, item.waeponGrade);
+                    player.ItemCnt -= 1;
                     item = null;
                     break;
 
@@ -54,7 +54,7 @@ public class Slot : MonoBehaviour
                     break;
             }
             //안해주면 다음에 아이템을 못주움
-            player.ItemCnt -= 1;
+
         }
     }
 }
