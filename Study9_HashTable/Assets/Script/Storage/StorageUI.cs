@@ -2,28 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Inhwan.HashTable;
+
 
 public class StorageUI : MonoBehaviour
 {
-    public HashTable<string> h;
-
     private Storage storage;
 
     public GameObject storagePanel;
-
-    public Slot[] slots;
+    public StorageSlot[] slots;
     public Transform slotHolder;
+
 
     private void Awake()
     {
-        h = new HashTable<string>(3);
         storage = GameObject.Find("Storage").GetComponent<Storage>();
     }
 
     private void Start()
     {
-        slots = slotHolder.GetComponentsInChildren<Slot>();
+        slots = slotHolder.GetComponentsInChildren<StorageSlot>();
         storage.onSlotCountChange += SlotChange;
         storagePanel.SetActive(false);
     }
@@ -43,7 +40,7 @@ public class StorageUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
         if (ClickMovement.instance.isShop == true)
         {
             storagePanel.SetActive(true);

@@ -62,8 +62,6 @@ public class InventoryUI : MonoBehaviour
                 inven.isUseInven = false;
             }
         }
-
-
     }
 
     //SlotCnt를 증가 시켜준다.
