@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StorageSlot : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class StorageSlot : MonoBehaviour
 
     public Image itemIcon;
     public Item item;
+
+    // 스코어 텍스트를 연결할 변수
+    public TMP_Text gradeText;
 
     private void Awake()
     {
@@ -32,6 +36,24 @@ public class StorageSlot : MonoBehaviour
         item = _item;
         itemIcon.sprite = item.itemImage;
         itemIcon.gameObject.SetActive(true);
+
+        switch (_item.waeponGrade)
+        {
+            case Item.WaeponGrade.A:
+                gradeText.color = Color.red;
+                break;
+            case Item.WaeponGrade.B:
+                gradeText.color = Color.blue;
+                break;
+            case Item.WaeponGrade.C:
+                gradeText.color = Color.yellow;
+                break;
+            case Item.WaeponGrade.D:
+                gradeText.color = Color.white;
+                break;
+        }
+
+        gradeText.text = $"{_item.waeponGrade}";
     }
 
     //슬롯버튼에 onclick함수로 추가
@@ -44,15 +66,11 @@ public class StorageSlot : MonoBehaviour
             {
 
                 case Item.ItemType.WAEPON:
-                    Debug.Log($"Player{player.ItemCnt}");
-                    Debug.Log($"storage{storage.ItemCnt}");
                     itemIcon.sprite = null;
                     itemIcon.gameObject.SetActive(false);
+                    gradeText.text = $"";
                     invenUI.slots[++player.ItemCnt].UpdateSlotUI(item);
-
-
                     storage.ItemCnt--;
-
                     item = null;
                     break;
 

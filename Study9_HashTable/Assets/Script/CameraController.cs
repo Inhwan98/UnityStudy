@@ -33,7 +33,7 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Destroy(gameObject);
             return;
@@ -52,7 +52,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(!isOtherUse)
+        if (!isOtherUse)
         {
             camTr.position = playerTr.position + offset;
             // Camera를 피벗 좌표를 향해 회전
@@ -66,7 +66,7 @@ public class CameraController : MonoBehaviour
                                               damping - damping + 0.2f);       // 목표 위치까지 도달할 시간
             camTr.LookAt(targetTr[1].position);
         }
-  
+
     }
 
     public void ChangeTarget(Transform changeTr, Transform looktargetTr)
@@ -74,8 +74,6 @@ public class CameraController : MonoBehaviour
         IsOtherUse = true;
         targetTr[0] = changeTr;
         targetTr[1] = looktargetTr;
-        Debug.Log("??");
-        
     }
 
 }

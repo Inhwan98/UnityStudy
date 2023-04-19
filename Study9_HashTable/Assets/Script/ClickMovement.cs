@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class ClickMovement : MonoBehaviour
 {
     public static ClickMovement instance = null;
+    InventoryUI invenUI;
 
     private new Camera camera;
     private CameraController CameraCtrl;
@@ -39,22 +40,23 @@ public class ClickMovement : MonoBehaviour
     void Start()
     {
         isShop = false;
+        invenUI = InventoryUI.instance;
     }
 
 
     void Update()
     {
-        if(Input.GetMouseButton(1) && !isShop)
+        if (Input.GetMouseButton(1) && !isShop)
         {
-            if(Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit))
+            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit))
             {
                 SetDestination(hit.point);
             }
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            if(Physics.Raycast(transform.position, transform.forward, out hit, 3.0f, 1 << 3))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 3.0f, 1 << 3))
             {
                 if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit))
                 {
@@ -69,10 +71,11 @@ public class ClickMovement : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             isShop = false;
             CameraCtrl.isOtherUse = false;
+            invenUI.inventoryPanel.SetActive(false);
         }
 
         LookMoveDirection();
@@ -88,7 +91,7 @@ public class ClickMovement : MonoBehaviour
 
     private void LookMoveDirection()
     {
-       
+
         if (isMove)
         {
             if (agent.velocity.magnitude == 0.0f)
