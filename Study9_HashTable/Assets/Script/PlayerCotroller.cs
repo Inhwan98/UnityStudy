@@ -15,10 +15,12 @@ public class PlayerCotroller : MonoBehaviour
     [HideInInspector]
     public int ItemCnt;
 
+    GameManager gmr;
+
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -34,14 +36,19 @@ public class PlayerCotroller : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        ItemCnt = -1;
+        gmr = GameManager.instance;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "ITEM")
+        if (other.tag == "ITEM")
         {
             //Item 클래스의 hitObject 인스턴스화 과정.
             //상대 오브젝트가 Consumable클래스의 item을 호출한다.
             Item hitObject = other.gameObject.GetComponentInParent<Consum>().item;
-            Debug.Log("item");
 
             //스크립트를 성공적으로 불러왔을 때
             if (hitObject != null)
@@ -56,7 +63,8 @@ public class PlayerCotroller : MonoBehaviour
                     case Item.ItemType.WAEPON:
                         if (ItemCnt < inven.SlotCnt)
                         {
-                            InvenUI.slots[ItemCnt++].UpdateSlotUI(hitObject);
+                            hitObject.waeponGrade = (Item.WaeponGrade)Random.Range(0, 4);
+                            InvenUI.slots[++ItemCnt].UpdateSlotUI(hitObject);
                             shouldDisapper = true;
                         }
                         break;

@@ -40,7 +40,6 @@ public class StorageUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (ClickMovement.instance.isShop == true)
         {
             storagePanel.SetActive(true);

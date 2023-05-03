@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Slot : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class Slot : MonoBehaviour
 
     public Item item;
     public Image itemIcon;
+
+    // 스코어 텍스트를 연결할 변수
+    public TMP_Text gradeText;
 
     private void Awake()
     {
@@ -30,6 +34,24 @@ public class Slot : MonoBehaviour
         item = _item;
         itemIcon.sprite = item.itemImage;
         itemIcon.gameObject.SetActive(true);
+
+        switch (_item.waeponGrade)
+        {
+            case Item.WaeponGrade.A:
+                gradeText.color = Color.red;
+                break;
+            case Item.WaeponGrade.B:
+                gradeText.color = Color.blue;
+                break;
+            case Item.WaeponGrade.C:
+                gradeText.color = Color.yellow;
+                break;
+            case Item.WaeponGrade.D:
+                gradeText.color = Color.white;
+                break;
+        }
+
+        gradeText.text = $"{_item.waeponGrade}";
     }
 
     //슬롯버튼에 onclick함수로 추가
@@ -43,7 +65,9 @@ public class Slot : MonoBehaviour
                 case Item.ItemType.WAEPON:
                     itemIcon.sprite = null;
                     itemIcon.gameObject.SetActive(false);
+                    gradeText.text = $"";
                     storageui.slots[++storage.ItemCnt].UpdateSlotUI(item);
+                    Debug.Log($"{item.name}");
                     gmr.HashPut(item.name, item.waeponGrade);
                     player.ItemCnt -= 1;
                     item = null;
@@ -53,7 +77,6 @@ public class Slot : MonoBehaviour
                     Debug.Log("Empty");
                     break;
             }
-            //안해주면 다음에 아이템을 못주움
 
         }
     }

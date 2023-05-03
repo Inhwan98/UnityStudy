@@ -15,6 +15,7 @@ public class InventoryUI : MonoBehaviour
     public Slot[] slots;
     public Transform slotHolder;
 
+
     private void Awake()
     {
         if (instance != null)
@@ -39,7 +40,7 @@ public class InventoryUI : MonoBehaviour
         //SlotCnt만큼만 intractable을 true해준다.
         for (int i = 0; i < slots.Length; i++)
         {
-            if (i < inven.SlotCnt)
+            if (i <= inven.SlotCnt)
                 slots[i].GetComponent<Button>().interactable = true;
             else
                 slots[i].GetComponent<Button>().interactable = false;
@@ -48,9 +49,16 @@ public class InventoryUI : MonoBehaviour
 
     private void Update()
     {
+        if (ClickMovement.instance.isShop == true)
+        {
+            inventoryPanel.SetActive(true);
+            activeInventory = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             activeInventory = !activeInventory;
+
             inventoryPanel.SetActive(activeInventory);
 
             if (activeInventory)
@@ -62,6 +70,9 @@ public class InventoryUI : MonoBehaviour
                 inven.isUseInven = false;
             }
         }
+       
+
+
     }
 
     //SlotCnt를 증가 시켜준다.
