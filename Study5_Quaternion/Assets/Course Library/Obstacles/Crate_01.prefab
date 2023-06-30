@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3373954}
   - component: {fileID: 2321600}
   - component: {fileID: 1389992441}
-  - component: {fileID: 7131629406363157215}
+  - component: {fileID: 3757596436744918150}
   m_Layer: 0
   m_Name: Crate_01
   m_TagString: Box
@@ -99,7 +99,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 6a1c3c31ad20ee24c837e6aad1e22d80, type: 3}
---- !u!114 &7131629406363157215
+--- !u!114 &3757596436744918150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
